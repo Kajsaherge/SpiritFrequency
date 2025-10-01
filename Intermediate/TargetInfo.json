@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "SpiritFrequency",
+			"Path": "..\\Source\\SpiritFrequency.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "SpiritFrequencyEditor",
+			"Path": "..\\Source\\SpiritFrequencyEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}

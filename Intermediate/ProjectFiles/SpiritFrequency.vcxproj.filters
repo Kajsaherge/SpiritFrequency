@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\SpiritFrequency.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{F31BBDD1-B3E8-3BCC-9652-680E16935819}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\SpiritFrequency.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\SpiritFrequencyEditor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\.vsconfig" />
+    <Filter Include="Config">
+      <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEditorPerProjectUserSettings.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Source\SpiritFrequency">
+      <UniqueIdentifier>{6BF6CE59-8E56-320E-A108-328FEE4B884F}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\SpiritFrequency\SpiritFrequency.Build.cs">
+      <Filter>Source\SpiritFrequency</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\SpiritFrequency\SpiritFrequency.cpp">
+      <Filter>Source\SpiritFrequency</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\SpiritFrequency\SpiritFrequency.h">
+      <Filter>Source\SpiritFrequency</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\SpiritFrequency\SpiritFrequencyCameraManager.cpp">
+      <Filter>Source\SpiritFrequency</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\SpiritFrequency\SpiritFrequencyCameraManager.h">
+      <Filter>Source\SpiritFrequency</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\SpiritFrequency\SpiritFrequencyCharacter.cpp">
+      <Filter>Source\SpiritFrequency</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\SpiritFrequency\SpiritFrequencyCharacter.h">
+      <Filter>Source\SpiritFrequency</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\SpiritFrequency\SpiritFrequencyGameMode.cpp">
+      <Filter>Source\SpiritFrequency</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\SpiritFrequency\SpiritFrequencyGameMode.h">
+      <Filter>Source\SpiritFrequency</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\SpiritFrequency\SpiritFrequencyPlayerController.cpp">
+      <Filter>Source\SpiritFrequency</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\SpiritFrequency\SpiritFrequencyPlayerController.h">
+      <Filter>Source\SpiritFrequency</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

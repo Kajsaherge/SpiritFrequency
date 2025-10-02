@@ -106,14 +106,14 @@ ASpiritFrequencyGameMode::~ASpiritFrequencyGameMode() {}
 // ********** End Class ASpiritFrequencyGameMode ***************************************************
 
 // ********** Begin Registration *******************************************************************
-struct Z_CompiledInDeferFile_FID_Users_kalj5019_Documents_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyGameMode_h__Script_SpiritFrequency_Statics
+struct Z_CompiledInDeferFile_FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyGameMode_h__Script_SpiritFrequency_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
 		{ Z_Construct_UClass_ASpiritFrequencyGameMode, ASpiritFrequencyGameMode::StaticClass, TEXT("ASpiritFrequencyGameMode"), &Z_Registration_Info_UClass_ASpiritFrequencyGameMode, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ASpiritFrequencyGameMode), 590461102U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_kalj5019_Documents_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyGameMode_h__Script_SpiritFrequency_3023748971(TEXT("/Script/SpiritFrequency"),
-	Z_CompiledInDeferFile_FID_Users_kalj5019_Documents_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyGameMode_h__Script_SpiritFrequency_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_kalj5019_Documents_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyGameMode_h__Script_SpiritFrequency_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyGameMode_h__Script_SpiritFrequency_3023748971(TEXT("/Script/SpiritFrequency"),
+	Z_CompiledInDeferFile_FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyGameMode_h__Script_SpiritFrequency_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyGameMode_h__Script_SpiritFrequency_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
 // ********** End Registration *********************************************************************

@@ -16,6 +16,6 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = SpiritFrequencyModuleRules
-build_property.ProjectDir = C:\Users\kalj5019\Documents\GitHub\SpiritFrequency\Intermediate\Build\BuildRulesProjects\SpiritFrequencyModuleRules\
+build_property.ProjectDir = C:\GitHub\SpiritFrequency\Intermediate\Build\BuildRulesProjects\SpiritFrequencyModuleRules\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

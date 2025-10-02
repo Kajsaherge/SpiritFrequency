@@ -104,14 +104,14 @@ ASpiritFrequencyCameraManager::~ASpiritFrequencyCameraManager() {}
 // ********** End Class ASpiritFrequencyCameraManager **********************************************
 
 // ********** Begin Registration *******************************************************************
-struct Z_CompiledInDeferFile_FID_Users_kalj5019_Documents_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCameraManager_h__Script_SpiritFrequency_Statics
+struct Z_CompiledInDeferFile_FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCameraManager_h__Script_SpiritFrequency_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
 		{ Z_Construct_UClass_ASpiritFrequencyCameraManager, ASpiritFrequencyCameraManager::StaticClass, TEXT("ASpiritFrequencyCameraManager"), &Z_Registration_Info_UClass_ASpiritFrequencyCameraManager, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ASpiritFrequencyCameraManager), 4032746876U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_kalj5019_Documents_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCameraManager_h__Script_SpiritFrequency_2933807078(TEXT("/Script/SpiritFrequency"),
-	Z_CompiledInDeferFile_FID_Users_kalj5019_Documents_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCameraManager_h__Script_SpiritFrequency_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_kalj5019_Documents_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCameraManager_h__Script_SpiritFrequency_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCameraManager_h__Script_SpiritFrequency_2933807078(TEXT("/Script/SpiritFrequency"),
+	Z_CompiledInDeferFile_FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCameraManager_h__Script_SpiritFrequency_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCameraManager_h__Script_SpiritFrequency_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
 // ********** End Registration *********************************************************************

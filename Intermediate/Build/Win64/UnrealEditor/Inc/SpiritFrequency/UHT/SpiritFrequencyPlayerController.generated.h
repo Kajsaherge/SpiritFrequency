@@ -19,7 +19,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 // ********** Begin Class ASpiritFrequencyPlayerController *****************************************
 SPIRITFREQUENCY_API UClass* Z_Construct_UClass_ASpiritFrequencyPlayerController_NoRegister();
 
-#define FID_Users_kalj5019_Documents_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyPlayerController_h_20_INCLASS_NO_PURE_DECLS \
+#define FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyPlayerController_h_20_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesASpiritFrequencyPlayerController(); \
 	friend struct Z_Construct_UClass_ASpiritFrequencyPlayerController_Statics; \
@@ -30,7 +30,7 @@ public: \
 	DECLARE_SERIALIZER(ASpiritFrequencyPlayerController)
 
 
-#define FID_Users_kalj5019_Documents_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyPlayerController_h_20_ENHANCED_CONSTRUCTORS \
+#define FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyPlayerController_h_20_ENHANCED_CONSTRUCTORS \
 	/** Deleted move- and copy-constructors, should never be used */ \
 	ASpiritFrequencyPlayerController(ASpiritFrequencyPlayerController&&) = delete; \
 	ASpiritFrequencyPlayerController(const ASpiritFrequencyPlayerController&) = delete; \
@@ -40,12 +40,12 @@ public: \
 	NO_API virtual ~ASpiritFrequencyPlayerController();
 
 
-#define FID_Users_kalj5019_Documents_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyPlayerController_h_17_PROLOG
-#define FID_Users_kalj5019_Documents_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyPlayerController_h_20_GENERATED_BODY \
+#define FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyPlayerController_h_17_PROLOG
+#define FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyPlayerController_h_20_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Users_kalj5019_Documents_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyPlayerController_h_20_INCLASS_NO_PURE_DECLS \
-	FID_Users_kalj5019_Documents_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyPlayerController_h_20_ENHANCED_CONSTRUCTORS \
+	FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyPlayerController_h_20_INCLASS_NO_PURE_DECLS \
+	FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyPlayerController_h_20_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
@@ -55,6 +55,6 @@ class ASpiritFrequencyPlayerController;
 // ********** End Class ASpiritFrequencyPlayerController *******************************************
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID FID_Users_kalj5019_Documents_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyPlayerController_h
+#define CURRENT_FILE_ID FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyPlayerController_h
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

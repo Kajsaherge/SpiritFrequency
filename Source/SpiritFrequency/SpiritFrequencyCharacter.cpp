@@ -43,7 +43,9 @@ ASpiritFrequencyCharacter::ASpiritFrequencyCharacter()
 	GetCharacterMovement()->BrakingDecelerationFalling = 1500.0f;
 	GetCharacterMovement()->AirControl = 0.5f;
 
+	//KOMPONENTER
 	NavigationComponent = CreateDefaultSubobject<UNavigationComponent>(TEXT("NavigationComponent"));
+	EMFComponent = CreateDefaultSubobject<UEMFComponent>(TEXT("EMFComponent"));
 }
 
 void ASpiritFrequencyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -61,6 +63,8 @@ void ASpiritFrequencyCharacter::SetupPlayerInputComponent(UInputComponent* Playe
 		// Looking/Aiming
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ASpiritFrequencyCharacter::LookInput);
 		EnhancedInputComponent->BindAction(MouseLookAction, ETriggerEvent::Triggered, this, &ASpiritFrequencyCharacter::LookInput);
+
+		EnhancedInputComponent->BindAction(EMFToggleAction, ETriggerEvent::Started, this, &ASpiritFrequencyCharacter::ToggleEMF);
 	}
 	else
 	{
@@ -123,4 +127,12 @@ void ASpiritFrequencyCharacter::DoJumpEnd()
 {
 	// pass StopJumping to the character
 	StopJumping();
+}
+
+void ASpiritFrequencyCharacter::ToggleEMF()
+{
+	if (EMFComponent)
+	{
+		EMFComponent->ToggleEMF();
+	}
 }

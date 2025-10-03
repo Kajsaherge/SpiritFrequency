@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
+#include "EMF.h"
 #include "NavigationComponent.h"  
 #include "SpiritFrequencyCharacter.generated.h"
 
@@ -51,6 +52,9 @@ protected:
 	/** Mouse Look Input Action */
 	UPROPERTY(EditAnywhere, Category ="Input")
 	class UInputAction* MouseLookAction;
+
+	UPROPERTY(EditAnywhere, Category ="Input")
+	UInputAction* EMFToggleAction;
 	
 public:
 	ASpiritFrequencyCharacter();
@@ -79,8 +83,19 @@ protected:
 	UFUNCTION(BlueprintCallable, Category="Input")
 	virtual void DoJumpEnd();
 
+	UFUNCTION(BlueprintCallable, Category="Input")
+	virtual void ToggleEMF();
+
+
+	//** KOMPONENTER
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Navigation")
 	UNavigationComponent* NavigationComponent;
+
+	// SpiritFrequencyCharacter.h
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="EMF")
+	UEMFComponent* EMFComponent;
+
 	
 
 	/** Set up input action bindings */

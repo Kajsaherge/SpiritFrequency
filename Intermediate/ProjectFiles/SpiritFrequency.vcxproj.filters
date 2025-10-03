@@ -34,6 +34,18 @@
     <Filter Include="Source\SpiritFrequency">
       <UniqueIdentifier>{6BF6CE59-8E56-320E-A108-328FEE4B884F}</UniqueIdentifier>
     </Filter>
+    <ClCompile Include="..\..\Source\SpiritFrequency\EMF.cpp">
+      <Filter>Source\SpiritFrequency</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\SpiritFrequency\EMF.h">
+      <Filter>Source\SpiritFrequency</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\SpiritFrequency\Ghost.cpp">
+      <Filter>Source\SpiritFrequency</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\SpiritFrequency\Ghost.h">
+      <Filter>Source\SpiritFrequency</Filter>
+    </ClInclude>
     <ClCompile Include="..\..\Source\SpiritFrequency\NavigationComponent.cpp">
       <Filter>Source\SpiritFrequency</Filter>
     </ClCompile>

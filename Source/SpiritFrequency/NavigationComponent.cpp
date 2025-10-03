@@ -58,27 +58,39 @@ void UNavigationComponent::SenseSurroundings()
 	FHitResult Hit;
 	float Distance;
 
-	// Framåt
-	if (SenseDirection(OwnerCharacter->GetActorForwardVector(), Hit, Distance))
-	{
-		// TODO: Mappa Distance till ljud/haptik (ex: ju kortare desto starkare vibration)
-	}
+	const float SoundDistanceThreshold = 300.f; // ljud börjar dämpas
+	const float HaptikThreshold = 100.f;        // haptik triggas när man är nära väggen
 
-	// Bakåt
-	if (SenseDirection(-OwnerCharacter->GetActorForwardVector(), Hit, Distance))
+	auto CheckDirection = [&](FVector Direction, FString DirectionName)
 	{
-		// TODO
-	}
+		if (SenseDirection(Direction, Hit, Distance))
+		{
+			// --- Ljudmodifiering ---
+			if (Distance <= SoundDistanceThreshold)
+			{
+				float AttenuationFactor = FMath::Clamp(Distance / SoundDistanceThreshold, 0.f, 1.f);
+				UE_LOG(LogTemp, Log, TEXT("%s: Avstånd = %.1f, ljud dämpningsfaktor = %.2f"), *DirectionName, Distance, AttenuationFactor);
 
-	// Höger
-	if (SenseDirection(OwnerCharacter->GetActorRightVector(), Hit, Distance))
-	{
-		// TODO
-	}
+				//TODO: Använd AttenuationFactor på AudioComponent
+				// AudioComponent->SetVolumeMultiplier(AttenuationFactor);
+				// AudioComponent->SetLowPassFilterFrequency(BaseFrequency * AttenuationFactor);
+			}
 
-	// Vänster
-	if (SenseDirection(-OwnerCharacter->GetActorRightVector(), Hit, Distance))
-	{
-		// TODO
-	}
+			// --- Haptik ---
+			if (Distance <= HaptikThreshold)
+			{
+				UE_LOG(LogTemp, Log, TEXT("%s: Haptik triggas!"), *DirectionName);
+				//TODO: Trigga haptik på spelaren, t.ex.
+				// OwnerCharacter->PlayHapticEffect(HapticEffect, EControllerHand::Left);
+			}
+		}
+	};
+
+	// Kolla alla fyra riktningar
+	CheckDirection(OwnerCharacter->GetActorForwardVector(), TEXT("Framåt"));
+	CheckDirection(-OwnerCharacter->GetActorForwardVector(), TEXT("Bakåt"));
+	CheckDirection(OwnerCharacter->GetActorRightVector(), TEXT("Höger"));
+	CheckDirection(-OwnerCharacter->GetActorRightVector(), TEXT("Vänster"));
 }
+
+

@@ -1,11 +1,14 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+
 
 #pragma once
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
+#include "NavigationComponent.h"  
 #include "SpiritFrequencyCharacter.generated.h"
+
+
 
 class UInputComponent;
 class USkeletalMeshComponent;
@@ -76,7 +79,9 @@ protected:
 	UFUNCTION(BlueprintCallable, Category="Input")
 	virtual void DoJumpEnd();
 
-protected:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Navigation")
+	UNavigationComponent* NavigationComponent;
+	
 
 	/** Set up input action bindings */
 	virtual void SetupPlayerInputComponent(UInputComponent* InputComponent) override;

@@ -17,7 +17,7 @@
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 
 // ********** Begin Class ASpiritFrequencyCharacter ************************************************
-#define FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h_24_RPC_WRAPPERS_NO_PURE_DECLS \
+#define FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h_27_RPC_WRAPPERS_NO_PURE_DECLS \
 	DECLARE_FUNCTION(execDoJumpEnd); \
 	DECLARE_FUNCTION(execDoJumpStart); \
 	DECLARE_FUNCTION(execDoMove); \
@@ -26,7 +26,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 
 SPIRITFREQUENCY_API UClass* Z_Construct_UClass_ASpiritFrequencyCharacter_NoRegister();
 
-#define FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h_24_INCLASS_NO_PURE_DECLS \
+#define FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h_27_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesASpiritFrequencyCharacter(); \
 	friend struct Z_Construct_UClass_ASpiritFrequencyCharacter_Statics; \
@@ -37,7 +37,7 @@ public: \
 	DECLARE_SERIALIZER(ASpiritFrequencyCharacter)
 
 
-#define FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h_24_ENHANCED_CONSTRUCTORS \
+#define FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h_27_ENHANCED_CONSTRUCTORS \
 	/** Deleted move- and copy-constructors, should never be used */ \
 	ASpiritFrequencyCharacter(ASpiritFrequencyCharacter&&) = delete; \
 	ASpiritFrequencyCharacter(const ASpiritFrequencyCharacter&) = delete; \
@@ -47,13 +47,13 @@ public: \
 	NO_API virtual ~ASpiritFrequencyCharacter();
 
 
-#define FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h_21_PROLOG
-#define FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h_24_GENERATED_BODY \
+#define FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h_24_PROLOG
+#define FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h_27_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h_24_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h_24_INCLASS_NO_PURE_DECLS \
-	FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h_24_ENHANCED_CONSTRUCTORS \
+	FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h_27_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h_27_INCLASS_NO_PURE_DECLS \
+	FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h_27_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

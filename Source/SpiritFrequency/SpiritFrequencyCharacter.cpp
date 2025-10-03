@@ -42,6 +42,8 @@ ASpiritFrequencyCharacter::ASpiritFrequencyCharacter()
 	// Configure character movement
 	GetCharacterMovement()->BrakingDecelerationFalling = 1500.0f;
 	GetCharacterMovement()->AirControl = 0.5f;
+
+	NavigationComponent = CreateDefaultSubobject<UNavigationComponent>(TEXT("NavigationComponent"));
 }
 
 void ASpiritFrequencyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -65,6 +67,10 @@ void ASpiritFrequencyCharacter::SetupPlayerInputComponent(UInputComponent* Playe
 		UE_LOG(LogSpiritFrequency, Error, TEXT("'%s' Failed to find an Enhanced Input Component! This template is built to use the Enhanced Input system. If you intend to use the legacy system, then you will need to update this C++ file."), *GetNameSafe(this));
 	}
 }
+
+
+
+
 
 
 void ASpiritFrequencyCharacter::MoveInput(const FInputActionValue& Value)

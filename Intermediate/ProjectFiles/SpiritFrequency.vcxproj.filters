@@ -11,6 +11,7 @@
     <None Include="..\..\Source\SpiritFrequencyEditor.Target.cs">
       <Filter>Source</Filter>
     </None>
+    <None Include="..\..\.gitignore" />
     <None Include="..\..\.vsconfig" />
     <Filter Include="Config">
       <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
@@ -33,6 +34,12 @@
     <Filter Include="Source\SpiritFrequency">
       <UniqueIdentifier>{6BF6CE59-8E56-320E-A108-328FEE4B884F}</UniqueIdentifier>
     </Filter>
+    <ClCompile Include="..\..\Source\SpiritFrequency\NavigationComponent.cpp">
+      <Filter>Source\SpiritFrequency</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\SpiritFrequency\NavigationComponent.h">
+      <Filter>Source\SpiritFrequency</Filter>
+    </ClInclude>
     <None Include="..\..\Source\SpiritFrequency\SpiritFrequency.Build.cs">
       <Filter>Source\SpiritFrequency</Filter>
     </None>

@@ -53,10 +53,6 @@ void ASpiritFrequencyCharacter::SetupPlayerInputComponent(UInputComponent* Playe
 	// Set up action bindings
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent))
 	{
-		// Jumping
-		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ASpiritFrequencyCharacter::DoJumpStart);
-		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ASpiritFrequencyCharacter::DoJumpEnd);
-
 		// Moving
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ASpiritFrequencyCharacter::MoveInput);
 
@@ -117,17 +113,6 @@ void ASpiritFrequencyCharacter::DoMove(float Right, float Forward)
 	}
 }
 
-void ASpiritFrequencyCharacter::DoJumpStart()
-{
-	// pass Jump to the character
-	Jump();
-}
-
-void ASpiritFrequencyCharacter::DoJumpEnd()
-{
-	// pass StopJumping to the character
-	StopJumping();
-}
 
 void ASpiritFrequencyCharacter::ToggleEMF()
 {

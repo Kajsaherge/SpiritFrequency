@@ -12,21 +12,6 @@ UEMFComponent::UEMFComponent()
 void UEMFComponent::BeginPlay()
 {
 	Super::BeginPlay();
-
-	if (!PingAudioComponent)
-	{
-		AActor* Owner = GetOwner();
-		if (Owner)
-		{
-			PingAudioComponent = NewObject<UAudioComponent>(Owner);
-			if (PingAudioComponent)
-			{
-				PingAudioComponent->bAutoActivate = false;
-				PingAudioComponent->RegisterComponent();
-				PingAudioComponent->AttachToComponent(Owner->GetRootComponent(), FAttachmentTransformRules::KeepRelativeTransform);
-			}
-		}
-	}
 }
 
 void UEMFComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -42,84 +27,130 @@ void UEMFComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorCo
 void UEMFComponent::ToggleEMF()
 {
 	bEMFActive = !bEMFActive;
-	UE_LOG(LogTemp, Log, TEXT("EMF %s"), bEMFActive ? TEXT("Activated") : TEXT("Deactivated"));
+
+	AActor* Owner = GetOwner();
+	if (!Owner) return;
+
+	FVector PlayerLocation = Owner->GetActorLocation();
+	FVector Down = FVector(0,0,-1); // nedåt
+
+	if (bEMFActive)
+	{
+		UE_LOG(LogTemp, Log, TEXT("EMF Activated"));
+
+		// Ljud för att ta fram EMF (lite nedåt, som ur ficka)
+		if (TakeoutPocket)
+		{
+			FVector PocketLocation = PlayerLocation + Down * 300.f;
+			UGameplayStatics::PlaySoundAtLocation(
+				GetWorld(),
+				TakeoutPocket,
+				PocketLocation,
+				0.5f,               // Volume
+				1.f,               // Pitch
+				0.f,               // Start time
+				PingAttenuation    // <- Använd samma attenuation
+			);
+		}
+
+		// Starta ping-systemet efter delay
+		FTimerHandle EMFStartDelay;
+		GetWorld()->GetTimerManager().SetTimer(EMFStartDelay, [this]()
+		{
+			if (bEMFActive)
+			{
+				TimeSinceLastPing = 0.f;
+				UE_LOG(LogTemp, Log, TEXT("EMF Ping system ready!"));
+			}
+		}, 0.8f, false);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Log, TEXT("EMF Deactivated"));
+
+		// Ljud för att lägga tillbaka EMF (lite nedåt)
+		if (PutInPocket)
+		{
+			FVector PocketLocation = PlayerLocation + Down * 300.f;
+			UGameplayStatics::PlaySoundAtLocation(
+				GetWorld(),
+				PutInPocket,
+				PocketLocation,
+				0.5f,               // Volume
+				1.f,               // Pitch
+				0.f,               // Start time
+				PingAttenuation    // <- Samma här
+			);
+		}
+	}
 }
 
 void UEMFComponent::UpdateEMF()
 {
-    if (!GetOwner() || !PingSound) return;
+	if (!GetOwner() || !PingSound) return;
 
-    FVector PlayerLocation = GetOwner()->GetActorLocation();
+	FVector PlayerLocation = GetOwner()->GetActorLocation();
 
-    // Hitta alla spöken med tag "Ghost"
-    TArray<AActor*> Ghosts;
-    UGameplayStatics::GetAllActorsWithTag(GetWorld(), FName("Ghost"), Ghosts);
+	// Hitta alla spöken
+	TArray<AActor*> Ghosts;
+	UGameplayStatics::GetAllActorsWithTag(GetWorld(), FName("Ghost"), Ghosts);
+	if (Ghosts.Num() == 0) return;
 
-    if (Ghosts.Num() == 0)
-        return; // Inga spöken i världen
+	// Närmaste spöke
+	AActor* ClosestGhost = nullptr;
+	float ClosestDistance = FLT_MAX;
 
-    // Hitta närmaste spöke
-    AActor* ClosestGhost = nullptr;
-    float ClosestDistance = FLT_MAX;
+	for (AActor* Ghost : Ghosts)
+	{
+		if (!Ghost) continue;
 
-    for (AActor* Ghost : Ghosts)
-    {
-        if (!Ghost) continue;
+		float Distance = FVector::Dist(PlayerLocation, Ghost->GetActorLocation());
+		if (Distance < ClosestDistance)
+		{
+			ClosestDistance = Distance;
+			ClosestGhost = Ghost;
+		}
 
-        float Distance = FVector::Dist(PlayerLocation, Ghost->GetActorLocation());
-        if (Distance < ClosestDistance)
-        {
-            ClosestDistance = Distance;
-            ClosestGhost = Ghost;
-        }
+		// Debug
+		DrawDebugLine(GetWorld(), PlayerLocation, Ghost->GetActorLocation(), FColor::Purple, false, 0.1f, 0, 2.f);
+		DrawDebugSphere(GetWorld(), Ghost->GetActorLocation(), 20.f, 12, FColor::Purple, false, 0.1f);
+	}
 
-        // Debug
-        DrawDebugLine(GetWorld(), PlayerLocation, Ghost->GetActorLocation(), FColor::Purple, false, 0.1f, 0, 2.f);
-        DrawDebugSphere(GetWorld(), Ghost->GetActorLocation(), 20.f, 12, FColor::Purple, false, 0.1f);
-    }
+	if (!ClosestGhost) return;
 
-    if (!ClosestGhost || !PingAudioComponent)
-        return;
-
-    // --- Ping-logik ---
-	// Maxavstånd för full effekt
+	// --- Ping-logik ---
 	float MaxEffectDistance = 5000.f;
-
-	// Minimum “area” runt spöket innan ping exploderar
 	float MinEffectDistance = 1000.f;
-
-	// Clamp avståndet till intervallet [MinEffectDistance, MaxEffectDistance]
 	float ClampedDistance = FMath::Clamp(ClosestDistance, MinEffectDistance, MaxEffectDistance);
-
-	// Normalisera avstånd: 0 = längst bort, 1 = innerst vid MinEffectDistance
 	float NormalizedDistance = 1.f - ((ClampedDistance - MinEffectDistance) / (MaxEffectDistance - MinEffectDistance));
-
-	// Icke-linjär kurva för dramatisk skillnad
 	float AdjustedDistance = FMath::Pow(NormalizedDistance, 2.5f);
 	AdjustedDistance = FMath::Clamp(AdjustedDistance, 0.f, 1.f);
-
-	// Beräkna intervallet mellan ping
 	float Interval = FMath::Lerp(MaxPingInterval, MinPingInterval, AdjustedDistance);
 
+	TimeSinceLastPing += GetWorld()->GetDeltaSeconds();
 
-    TimeSinceLastPing += GetWorld()->GetDeltaSeconds();
+	if (TimeSinceLastPing >= Interval)
+	{
+		// Placera pingen framför spelaren (ungefär där EMF hålls)
+		FRotator PlayerRotation = GetOwner()->GetActorRotation();
+		FVector Forward = PlayerRotation.Vector();
+		FVector PingLocation = PlayerLocation + Forward * 3000.f + FVector(0,0,20.f);
 
-    // Debug-loggar
-    UE_LOG(LogTemp, Warning, TEXT("ClosestDistance: %.1f, Normalized: %.3f, Adjusted: %.3f, Interval: %.2f"),
-        ClosestDistance, NormalizedDistance, AdjustedDistance, Interval);
+		if (PingSound && PingAttenuation)
+		{
+			UGameplayStatics::PlaySoundAtLocation(
+				GetWorld(),
+				PingSound,
+				PingLocation,
+				1.f,              // Volume
+				1.f,              // Pitch
+				0.f,              // Start time
+				PingAttenuation   // 3D-attenuation
+			);
+		}
 
-    if (TimeSinceLastPing >= Interval)
-    {
-        PingAudioComponent->SetSound(PingSound);
-        PingAudioComponent->SetPitchMultiplier(1.0f);
-        PingAudioComponent->Play();
+		TimeSinceLastPing = 0.f;
 
-        TimeSinceLastPing = 0.f;
-
-        UE_LOG(LogTemp, Log, TEXT("Ping! Closest distance: %.1f, Interval: %.2f"), ClosestDistance, Interval);
-    }
+		UE_LOG(LogTemp, Log, TEXT("Ping! Closest distance: %.1f, Interval: %.2f"), ClosestDistance, Interval);
+	}
 }
-
-
-
-

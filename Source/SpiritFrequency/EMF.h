@@ -39,11 +39,21 @@ private:
 	UPROPERTY(EditAnywhere, Category="EMF")
 	USoundBase* PingSound; // Lägg till i Blueprint för att välja ljudfil
 
-	UPROPERTY(EditAnywhere, Category="EMF")
-	float MinPingInterval = 0.05f; // Långsammare ping när långt bort
+	UPROPERTY(EditAnywhere, Category="EMF|Sound")
+	USoundAttenuation* PingAttenuation;
+
 
 	UPROPERTY(EditAnywhere, Category="EMF")
-	float MaxPingInterval = 5.0f; // Max tid mellan ping
+	USoundBase* TakeoutPocket;
+
+	UPROPERTY(EditAnywhere, Category="EMF")
+	USoundBase* PutInPocket; 
+
+	UPROPERTY(EditAnywhere, Category="EMF")
+	float MinPingInterval = 0.01f; // Långsammare ping när långt bort
+
+	UPROPERTY(EditAnywhere, Category="EMF")
+	float MaxPingInterval = 10.0f; // Max tid mellan ping
 
 	float TimeSinceLastPing = 0.f;
 };

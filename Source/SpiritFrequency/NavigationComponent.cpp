@@ -1,6 +1,7 @@
 // NavigationSenseComponent.cpp
 #include "NavigationComponent.h"
 #include "GameFramework/Character.h"
+#include "Kismet/GameplayStatics.h"
 #include "DrawDebugHelpers.h"
 
 UNavigationComponent::UNavigationComponent()
@@ -12,6 +13,7 @@ void UNavigationComponent::BeginPlay()
 {
 	Super::BeginPlay();
 	OwnerCharacter = Cast<ACharacter>(GetOwner());
+	
 	
 }
 
@@ -51,6 +53,7 @@ bool UNavigationComponent::SenseDirection(FVector Direction, FHitResult& OutHit,
 	return bHit;
 }
 
+
 void UNavigationComponent::SenseSurroundings()
 {
 	if (!OwnerCharacter) return;
@@ -59,7 +62,9 @@ void UNavigationComponent::SenseSurroundings()
 	float Distance;
 
 	const float SoundDistanceThreshold = 300.f; // ljud börjar dämpas
-	const float HaptikThreshold = 100.f;        // haptik triggas när man är nära väggen
+	const float HaptikThreshold = 100.f;       // haptik triggas när man är nära väggen
+	FVector Velocity = OwnerCharacter->GetVelocity();
+	FVector MovementDir = Velocity.GetSafeNormal();
 
 	auto CheckDirection = [&](FVector Direction, FString DirectionName)
 	{
@@ -70,19 +75,50 @@ void UNavigationComponent::SenseSurroundings()
 			{
 				float AttenuationFactor = FMath::Clamp(Distance / SoundDistanceThreshold, 0.f, 1.f);
 				UE_LOG(LogTemp, Log, TEXT("%s: Avstånd = %.1f, ljud dämpningsfaktor = %.2f"), *DirectionName, Distance, AttenuationFactor);
-
-				//TODO: Använd AttenuationFactor på AudioComponent
-				// AudioComponent->SetVolumeMultiplier(AttenuationFactor);
-				// AudioComponent->SetLowPassFilterFrequency(BaseFrequency * AttenuationFactor);
+				// TODO: Använd AttenuationFactor på AudioComponent om du vill
 			}
 
 			// --- Haptik ---
 			if (Distance <= HaptikThreshold)
 			{
 				UE_LOG(LogTemp, Log, TEXT("%s: Haptik triggas!"), *DirectionName);
-				//TODO: Trigga haptik på spelaren, t.ex.
-				// OwnerCharacter->PlayHapticEffect(HapticEffect, EControllerHand::Left);
+				// TODO: Trigga haptik på spelaren
 			}
+
+			
+
+			FVector CurrentPos = OwnerCharacter->GetActorLocation();
+			FVector LastPos = LastPositions.Contains(DirectionName) ? LastPositions[DirectionName] : CurrentPos;
+			FVector MovementTowardWall = CurrentPos - LastPos;
+
+			float Dot = FVector::DotProduct(MovementTowardWall, Direction);
+
+			if (Dot > 0.f) // spelaren rör sig mot väggen
+			{
+				float CurrentTime = GetWorld()->GetTimeSeconds();
+				float* LastTimePtr = LastWallHitTimes.Find(DirectionName);
+				float LastTime = LastTimePtr ? *LastTimePtr : 0.f;
+
+				if (Distance <= WallHitDistance && CurrentTime - LastTime >= WallHitCooldown)
+				{
+					if (WallHitSound && GetWorld())
+					{
+						UGameplayStatics::PlaySoundAtLocation(
+							GetWorld(),
+							WallHitSound,
+							Hit.ImpactPoint,
+							1.f, 1.f, 0.f, WallHitAttenuation
+						);
+
+						LastWallHitTimes.Add(DirectionName, CurrentTime);
+					}
+				}
+			}
+
+			// Uppdatera senaste positionen
+			LastPositions.Add(DirectionName, CurrentPos);
+
+
 		}
 	};
 
@@ -92,5 +128,6 @@ void UNavigationComponent::SenseSurroundings()
 	CheckDirection(OwnerCharacter->GetActorRightVector(), TEXT("Höger"));
 	CheckDirection(-OwnerCharacter->GetActorRightVector(), TEXT("Vänster"));
 }
+
 
 

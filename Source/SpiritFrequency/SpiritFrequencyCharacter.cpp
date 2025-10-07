@@ -69,10 +69,6 @@ void ASpiritFrequencyCharacter::SetupPlayerInputComponent(UInputComponent* Playe
 }
 
 
-
-
-
-
 void ASpiritFrequencyCharacter::MoveInput(const FInputActionValue& Value)
 {
 	// get the Vector2D move axis

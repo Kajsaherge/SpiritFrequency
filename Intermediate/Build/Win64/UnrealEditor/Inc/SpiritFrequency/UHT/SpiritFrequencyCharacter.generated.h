@@ -19,8 +19,6 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 // ********** Begin Class ASpiritFrequencyCharacter ************************************************
 #define FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h_28_RPC_WRAPPERS_NO_PURE_DECLS \
 	DECLARE_FUNCTION(execToggleEMF); \
-	DECLARE_FUNCTION(execDoJumpEnd); \
-	DECLARE_FUNCTION(execDoJumpStart); \
 	DECLARE_FUNCTION(execDoMove); \
 	DECLARE_FUNCTION(execDoAim);
 

@@ -23,6 +23,36 @@ SPIRITFREQUENCY_API UClass* Z_Construct_UClass_UNavigationComponent_NoRegister()
 UPackage* Z_Construct_UPackage__Script_SpiritFrequency();
 // ********** End Cross Module References **********************************************************
 
+// ********** Begin Class ASpiritFrequencyCharacter Function CatchGhost ****************************
+struct Z_Construct_UFunction_ASpiritFrequencyCharacter_CatchGhost_Statics
+{
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "Input" },
+		{ "ModuleRelativePath", "SpiritFrequencyCharacter.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_ASpiritFrequencyCharacter_CatchGhost_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_ASpiritFrequencyCharacter, nullptr, "CatchGhost", nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04080400, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_ASpiritFrequencyCharacter_CatchGhost_Statics::Function_MetaDataParams), Z_Construct_UFunction_ASpiritFrequencyCharacter_CatchGhost_Statics::Function_MetaDataParams)},  };
+UFunction* Z_Construct_UFunction_ASpiritFrequencyCharacter_CatchGhost()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_ASpiritFrequencyCharacter_CatchGhost_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(ASpiritFrequencyCharacter::execCatchGhost)
+{
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	P_THIS->CatchGhost();
+	P_NATIVE_END;
+}
+// ********** End Class ASpiritFrequencyCharacter Function CatchGhost ******************************
+
 // ********** Begin Class ASpiritFrequencyCharacter Function DoAim *********************************
 struct Z_Construct_UFunction_ASpiritFrequencyCharacter_DoAim_Statics
 {
@@ -166,6 +196,7 @@ void ASpiritFrequencyCharacter::StaticRegisterNativesASpiritFrequencyCharacter()
 {
 	UClass* Class = ASpiritFrequencyCharacter::StaticClass();
 	static const FNameNativePtrPair Funcs[] = {
+		{ "CatchGhost", &ASpiritFrequencyCharacter::execCatchGhost },
 		{ "DoAim", &ASpiritFrequencyCharacter::execDoAim },
 		{ "DoMove", &ASpiritFrequencyCharacter::execDoMove },
 		{ "ToggleEMF", &ASpiritFrequencyCharacter::execToggleEMF },
@@ -273,6 +304,10 @@ struct Z_Construct_UClass_ASpiritFrequencyCharacter_Statics
 		{ "Category", "Input" },
 		{ "ModuleRelativePath", "SpiritFrequencyCharacter.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CatchGhostAction_MetaData[] = {
+		{ "Category", "Input" },
+		{ "ModuleRelativePath", "SpiritFrequencyCharacter.h" },
+	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_NavigationComponent_MetaData[] = {
 		{ "Category", "Navigation" },
 #if !UE_BUILD_SHIPPING
@@ -295,6 +330,10 @@ struct Z_Construct_UClass_ASpiritFrequencyCharacter_Statics
 		{ "ToolTip", "SpiritFrequencyCharacter.h" },
 #endif
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CatchRadius_MetaData[] = {
+		{ "Category", "Ghost Catching" },
+		{ "ModuleRelativePath", "SpiritFrequencyCharacter.h" },
+	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_FirstPersonMesh;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_FirstPersonCameraComponent;
@@ -302,11 +341,14 @@ struct Z_Construct_UClass_ASpiritFrequencyCharacter_Statics
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_LookAction;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_MouseLookAction;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_EMFToggleAction;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_CatchGhostAction;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_NavigationComponent;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_EMFComponent;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_CatchRadius;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
+		{ &Z_Construct_UFunction_ASpiritFrequencyCharacter_CatchGhost, "CatchGhost" }, // 3305317169
 		{ &Z_Construct_UFunction_ASpiritFrequencyCharacter_DoAim, "DoAim" }, // 41579004
 		{ &Z_Construct_UFunction_ASpiritFrequencyCharacter_DoMove, "DoMove" }, // 1849427295
 		{ &Z_Construct_UFunction_ASpiritFrequencyCharacter_ToggleEMF, "ToggleEMF" }, // 3180715485
@@ -323,8 +365,10 @@ const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ASpiritFrequen
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ASpiritFrequencyCharacter_Statics::NewProp_LookAction = { "LookAction", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASpiritFrequencyCharacter, LookAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_LookAction_MetaData), NewProp_LookAction_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ASpiritFrequencyCharacter_Statics::NewProp_MouseLookAction = { "MouseLookAction", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASpiritFrequencyCharacter, MouseLookAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MouseLookAction_MetaData), NewProp_MouseLookAction_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ASpiritFrequencyCharacter_Statics::NewProp_EMFToggleAction = { "EMFToggleAction", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASpiritFrequencyCharacter, EMFToggleAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_EMFToggleAction_MetaData), NewProp_EMFToggleAction_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ASpiritFrequencyCharacter_Statics::NewProp_CatchGhostAction = { "CatchGhostAction", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASpiritFrequencyCharacter, CatchGhostAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CatchGhostAction_MetaData), NewProp_CatchGhostAction_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ASpiritFrequencyCharacter_Statics::NewProp_NavigationComponent = { "NavigationComponent", nullptr, (EPropertyFlags)0x00200800000a001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASpiritFrequencyCharacter, NavigationComponent), Z_Construct_UClass_UNavigationComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_NavigationComponent_MetaData), NewProp_NavigationComponent_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ASpiritFrequencyCharacter_Statics::NewProp_EMFComponent = { "EMFComponent", nullptr, (EPropertyFlags)0x00200800000a001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASpiritFrequencyCharacter, EMFComponent), Z_Construct_UClass_UEMFComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_EMFComponent_MetaData), NewProp_EMFComponent_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ASpiritFrequencyCharacter_Statics::NewProp_CatchRadius = { "CatchRadius", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASpiritFrequencyCharacter, CatchRadius), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CatchRadius_MetaData), NewProp_CatchRadius_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ASpiritFrequencyCharacter_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASpiritFrequencyCharacter_Statics::NewProp_FirstPersonMesh,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASpiritFrequencyCharacter_Statics::NewProp_FirstPersonCameraComponent,
@@ -332,8 +376,10 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ASpiritFr
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASpiritFrequencyCharacter_Statics::NewProp_LookAction,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASpiritFrequencyCharacter_Statics::NewProp_MouseLookAction,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASpiritFrequencyCharacter_Statics::NewProp_EMFToggleAction,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASpiritFrequencyCharacter_Statics::NewProp_CatchGhostAction,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASpiritFrequencyCharacter_Statics::NewProp_NavigationComponent,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASpiritFrequencyCharacter_Statics::NewProp_EMFComponent,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASpiritFrequencyCharacter_Statics::NewProp_CatchRadius,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_ASpiritFrequencyCharacter_Statics::PropPointers) < 2048);
 UObject* (*const Z_Construct_UClass_ASpiritFrequencyCharacter_Statics::DependentSingletons[])() = {
@@ -372,10 +418,10 @@ ASpiritFrequencyCharacter::~ASpiritFrequencyCharacter() {}
 struct Z_CompiledInDeferFile_FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h__Script_SpiritFrequency_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_ASpiritFrequencyCharacter, ASpiritFrequencyCharacter::StaticClass, TEXT("ASpiritFrequencyCharacter"), &Z_Registration_Info_UClass_ASpiritFrequencyCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ASpiritFrequencyCharacter), 666539085U) },
+		{ Z_Construct_UClass_ASpiritFrequencyCharacter, ASpiritFrequencyCharacter::StaticClass, TEXT("ASpiritFrequencyCharacter"), &Z_Registration_Info_UClass_ASpiritFrequencyCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ASpiritFrequencyCharacter), 3166809488U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h__Script_SpiritFrequency_3894745099(TEXT("/Script/SpiritFrequency"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h__Script_SpiritFrequency_628636561(TEXT("/Script/SpiritFrequency"),
 	Z_CompiledInDeferFile_FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h__Script_SpiritFrequency_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h__Script_SpiritFrequency_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

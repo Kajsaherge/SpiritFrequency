@@ -78,22 +78,27 @@ void UNavigationComponent::SenseSurroundings()
 				// TODO: Använd AttenuationFactor på AudioComponent om du vill
 			}
 
-			// --- Haptik ---
-			if (Distance <= HaptikThreshold)
+			if (!Hit.GetActor()->ActorHasTag(FName("IgnoreHaptik")))
 			{
-				UE_LOG(LogTemp, Log, TEXT("%s: Haptik triggas!"), *DirectionName);
-
-				APlayerController* PC = Cast<APlayerController>(OwnerCharacter->GetController());
-				if (PC)
+				// --- Haptik ---
+				if (Distance <= HaptikThreshold)
 				{
-					// Styrka mellan 0.0f - 1.0f
-					float Intensity = 1.0f - (Distance / HaptikThreshold); // starkare ju närmare väggen
-					Intensity = FMath::Clamp(Intensity, 0.1f, 1.0f);
+					APlayerController* PC = Cast<APlayerController>(OwnerCharacter->GetController());
+					if (PC)
+					{
+						float Intensity = 1.0f - (Distance / HaptikThreshold);
+						Intensity = FMath::Clamp(Intensity, 0.1f, 1.0f);
 
-					// Enkel vibration (0.2 sekunder)
-					PC->PlayDynamicForceFeedback(Intensity, 0.2f, true, true, true, true);
+						bool LeftMotor = (DirectionName == "Vänster");
+						bool RightMotor = (DirectionName == "Höger");
+
+						PC->PlayDynamicForceFeedback(
+							Intensity, 0.2f, LeftMotor, true, RightMotor, true
+						);
+					}
 				}
 			}
+
 
 			
 

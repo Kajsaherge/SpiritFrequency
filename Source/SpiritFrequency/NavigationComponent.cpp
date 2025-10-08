@@ -82,7 +82,17 @@ void UNavigationComponent::SenseSurroundings()
 			if (Distance <= HaptikThreshold)
 			{
 				UE_LOG(LogTemp, Log, TEXT("%s: Haptik triggas!"), *DirectionName);
-				// TODO: Trigga haptik på spelaren
+
+				APlayerController* PC = Cast<APlayerController>(OwnerCharacter->GetController());
+				if (PC)
+				{
+					// Styrka mellan 0.0f - 1.0f
+					float Intensity = 1.0f - (Distance / HaptikThreshold); // starkare ju närmare väggen
+					Intensity = FMath::Clamp(Intensity, 0.1f, 1.0f);
+
+					// Enkel vibration (0.2 sekunder)
+					PC->PlayDynamicForceFeedback(Intensity, 0.2f, true, true, true, true);
+				}
 			}
 
 			

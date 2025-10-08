@@ -3,6 +3,9 @@
 
 #include "Ghost.h"
 
+#include "EngineUtils.h"
+#include "GhostManager.h"
+
 // Sets default values
 AGhost::AGhost()
 {
@@ -23,5 +26,14 @@ void AGhost::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void AGhost::Caught() const
+{
+	for (TActorIterator<AGhostManager> It(GetWorld()); It; ++It)
+	{
+		It->OnGhostCaught();
+		break;
+	}
 }
 

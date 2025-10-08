@@ -1,11 +1,14 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "SpiritFrequencyCharacter.h"
+
+#include "EngineUtils.h"
 #include "Animation/AnimInstance.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "EnhancedInputComponent.h"
+#include "Ghost.h"
 #include "InputActionValue.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "SpiritFrequency.h"
@@ -49,7 +52,7 @@ ASpiritFrequencyCharacter::ASpiritFrequencyCharacter()
 }
 
 void ASpiritFrequencyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{	
+{
 	// Set up action bindings
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent))
 	{
@@ -61,10 +64,44 @@ void ASpiritFrequencyCharacter::SetupPlayerInputComponent(UInputComponent* Playe
 		EnhancedInputComponent->BindAction(MouseLookAction, ETriggerEvent::Triggered, this, &ASpiritFrequencyCharacter::LookInput);
 
 		EnhancedInputComponent->BindAction(EMFToggleAction, ETriggerEvent::Started, this, &ASpiritFrequencyCharacter::ToggleEMF);
+		
+		EnhancedInputComponent->BindAction(CatchGhostAction, ETriggerEvent::Started, this, &ASpiritFrequencyCharacter::CatchGhost);
 	}
 	else
 	{
 		UE_LOG(LogSpiritFrequency, Error, TEXT("'%s' Failed to find an Enhanced Input Component! This template is built to use the Enhanced Input system. If you intend to use the legacy system, then you will need to update this C++ file."), *GetNameSafe(this));
+	}
+}
+
+void ASpiritFrequencyCharacter::TryCatchGhost() const
+{
+	UE_LOG(LogTemp, Warning, TEXT("TryCatchGhost() triggered"));
+	
+	FVector PlayerLoc = GetActorLocation();
+	AGhost* ClosestGhost = nullptr;
+	float ClosestDist = CatchRadius;
+
+	for (TActorIterator<AGhost> It(GetWorld()); It; ++It)
+	{
+		AGhost* Ghost = *It;
+		float Distance = FVector::Dist(PlayerLoc, Ghost->GetActorLocation());
+		
+		if (Distance <= CatchRadius && Distance < ClosestDist)
+		{
+			ClosestGhost = Ghost;
+			ClosestDist = Distance;
+		}
+	}
+
+	if (ClosestGhost)
+	{
+		ClosestGhost->Caught();
+
+		UE_LOG(LogTemp, Warning, TEXT("Ghost caught!"));
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("No ghost nearby."));
 	}
 }
 
@@ -116,4 +153,10 @@ void ASpiritFrequencyCharacter::ToggleEMF()
 	{
 		EMFComponent->ToggleEMF();
 	}
+}
+
+void ASpiritFrequencyCharacter::CatchGhost()
+{
+	UE_LOG(LogTemp, Warning, TEXT("CatchGhost() triggered"));
+	TryCatchGhost();
 }

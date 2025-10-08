@@ -51,6 +51,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category ="Input")
 	UInputAction* EMFToggleAction;
+
+	UPROPERTY(EditAnywhere, Category ="Input")
+	UInputAction* CatchGhostAction;
 	
 public:
 	ASpiritFrequencyCharacter();
@@ -74,6 +77,9 @@ protected:
 	UFUNCTION(BlueprintCallable, Category="Input")
 	virtual void ToggleEMF();
 
+	UFUNCTION(BlueprintCallable, Category="Input")
+	virtual void CatchGhost();
+
 
 	//** KOMPONENTER
 
@@ -83,11 +89,14 @@ protected:
 	// SpiritFrequencyCharacter.h
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="EMF")
 	UEMFComponent* EMFComponent;
-
 	
-
 	/** Set up input action bindings */
 	virtual void SetupPlayerInputComponent(UInputComponent* InputComponent) override;
+
+	void TryCatchGhost() const;
+
+	UPROPERTY(EditAnywhere, Category = "Ghost Catching")
+	float CatchRadius = 1000.f;
 	
 
 public:

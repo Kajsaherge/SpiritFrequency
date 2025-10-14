@@ -47,10 +47,22 @@
     <ClInclude Include="..\..\Source\SpiritFrequency\Ghost.h">
       <Filter>Source\SpiritFrequency</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\Source\SpiritFrequency\GhostManager.cpp">
+      <Filter>Source\SpiritFrequency</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\SpiritFrequency\GhostManager.h">
+      <Filter>Source\SpiritFrequency</Filter>
+    </ClInclude>
     <ClCompile Include="..\..\Source\SpiritFrequency\NavigationComponent.cpp">
       <Filter>Source\SpiritFrequency</Filter>
     </ClCompile>
     <ClInclude Include="..\..\Source\SpiritFrequency\NavigationComponent.h">
+      <Filter>Source\SpiritFrequency</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\SpiritFrequency\SpawnPoints.cpp">
+      <Filter>Source\SpiritFrequency</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\SpiritFrequency\SpawnPoints.h">
       <Filter>Source\SpiritFrequency</Filter>
     </ClInclude>
     <None Include="..\..\Source\SpiritFrequency\SpiritFrequency.Build.cs">

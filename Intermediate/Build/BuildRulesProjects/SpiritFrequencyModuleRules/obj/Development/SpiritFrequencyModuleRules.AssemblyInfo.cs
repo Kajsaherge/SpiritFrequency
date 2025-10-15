@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SpiritFrequencyModuleRules")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Development")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e15ffc9f136d465ed1920b147b59b0e3858ee848")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d4e317181810a10cf23c20be1648fb0d6021aa97")]
 [assembly: System.Reflection.AssemblyProductAttribute("SpiritFrequencyModuleRules")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SpiritFrequencyModuleRules")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

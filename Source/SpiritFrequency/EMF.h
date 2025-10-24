@@ -31,6 +31,7 @@ public:
 
 private:
 	void UpdateEMF();
+	
 
 	//LJUD FÖR EMF
 	UPROPERTY()
@@ -38,10 +39,7 @@ private:
 
 	UPROPERTY(EditAnywhere, Category="EMF")
 	USoundBase* PingSound; // Lägg till i Blueprint för att välja ljudfil
-
-	UPROPERTY(EditAnywhere, Category="EMF|Sound")
-	USoundAttenuation* PingAttenuation;
-
+	
 
 	UPROPERTY(EditAnywhere, Category="EMF")
 	USoundBase* TakeoutPocket;

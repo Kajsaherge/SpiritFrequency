@@ -54,9 +54,7 @@ void UEMFComponent::ToggleEMF()
                 TakeoutPocket,      // Sound Cue eller Wave
                 PocketLocation,
                 0.7f,               // Volume
-                1.f,                // Pitch
-                0.f,                // StartTime
-                PingAttenuation
+                1.f
             );
         }
 
@@ -81,9 +79,7 @@ void UEMFComponent::ToggleEMF()
                 PutInPocket,        // Sound Cue eller Wave
                 PocketLocation,
                 0.7f,
-                1.f,
-                0.f,
-                PingAttenuation
+                1.f
             );
         }
     }
@@ -136,26 +132,25 @@ void UEMFComponent::UpdateEMF()
 
     if (TimeSinceLastPing >= Interval)
     {
-        FRotator PlayerRotation = GetOwner()->GetActorRotation();
-        FVector Forward = PlayerRotation.Vector();
-        FVector PingLocation = PlayerLocation + Forward * 2000.f + FVector(0,0,50.f);
+        FVector DirectionToGhost = (ClosestGhost->GetActorLocation() - PlayerLocation).GetSafeNormal();
 
-        if (PingSound)
-        {
-            // PlaySoundAtLocation fungerar direkt med Sound Cue
-            UGameplayStatics::PlaySoundAtLocation(
-                GetWorld(),
-                PingSound,         // Här kan PingSound vara en Sound Cue
-                PingLocation,
-                1.f,
-                1.f,
-                0.f,
-                PingAttenuation
-            );
-        }
+        // Ping-placering relativt spelaren (t.ex. lite framför och ovanför)
+        FVector RelativePingLocation = DirectionToGhost * 10 + FVector(0, 0, 50.f);
+
+        // Spela ljudet kopplat till spelaren, så det följer
+        UGameplayStatics::SpawnSoundAttached(
+            PingSound,
+            GetOwner()->GetRootComponent(),   // Fäster ljudet till spelaren
+            NAME_None,
+            RelativePingLocation,             // Offset från root
+            EAttachLocation::KeepRelativeOffset,
+            true                              // bStopWhenAttachedToDestroyed
+        );
 
         TimeSinceLastPing = 0.f;
 
         UE_LOG(LogTemp, Log, TEXT("Ping! Closest distance: %.1f, Interval: %.2f"), ClosestDistance, Interval);
     }
+
 }
+

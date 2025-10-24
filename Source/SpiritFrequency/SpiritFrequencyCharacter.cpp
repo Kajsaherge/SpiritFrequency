@@ -1,7 +1,7 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "SpiritFrequencyCharacter.h"
-
+#include "SpiritFrequencyPlayerController.h"
 #include "EngineUtils.h"
 #include "Animation/AnimInstance.h"
 #include "Camera/CameraComponent.h"
@@ -55,13 +55,10 @@ void ASpiritFrequencyCharacter::SetupPlayerInputComponent(UInputComponent* Playe
 {
 	// Set up action bindings
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent))
-	{
+	{  
+
 		// Moving
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ASpiritFrequencyCharacter::MoveInput);
-
-		// Looking/Aiming
-		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ASpiritFrequencyCharacter::LookInput);
-		EnhancedInputComponent->BindAction(MouseLookAction, ETriggerEvent::Triggered, this, &ASpiritFrequencyCharacter::LookInput);
 
 		EnhancedInputComponent->BindAction(EMFToggleAction, ETriggerEvent::Started, this, &ASpiritFrequencyCharacter::ToggleEMF);
 		
@@ -75,6 +72,13 @@ void ASpiritFrequencyCharacter::SetupPlayerInputComponent(UInputComponent* Playe
 
 void ASpiritFrequencyCharacter::TryCatchGhost() const
 {
+
+	ASpiritFrequencyPlayerController* MyPC = Cast<ASpiritFrequencyPlayerController>(GetController());
+	if (MyPC && MyPC->bIsMenuOpen)
+	{
+		return;
+	}
+	
 	UE_LOG(LogTemp, Warning, TEXT("TryCatchGhost() triggered"));
 	
 	FVector PlayerLoc = GetActorLocation();
@@ -108,6 +112,12 @@ void ASpiritFrequencyCharacter::TryCatchGhost() const
 
 void ASpiritFrequencyCharacter::MoveInput(const FInputActionValue& Value)
 {
+
+	ASpiritFrequencyPlayerController* MyPC = Cast<ASpiritFrequencyPlayerController>(GetController());
+	if (MyPC && MyPC->bIsMenuOpen)
+	{
+		return;
+	}
 	// get the Vector2D move axis
 	FVector2D MovementVector = Value.Get<FVector2D>();
 
@@ -116,28 +126,15 @@ void ASpiritFrequencyCharacter::MoveInput(const FInputActionValue& Value)
 
 }
 
-void ASpiritFrequencyCharacter::LookInput(const FInputActionValue& Value)
-{
-	// get the Vector2D look axis
-	FVector2D LookAxisVector = Value.Get<FVector2D>();
-
-	// pass the axis values to the aim input
-	DoAim(LookAxisVector.X, LookAxisVector.Y);
-
-}
-
-void ASpiritFrequencyCharacter::DoAim(float Yaw, float Pitch)
-{
-	if (GetController())
-	{
-		// pass the rotation inputs
-		AddControllerYawInput(Yaw);
-		AddControllerPitchInput(Pitch);
-	}
-}
-
 void ASpiritFrequencyCharacter::DoMove(float Right, float Forward)
 {
+
+	ASpiritFrequencyPlayerController* MyPC = Cast<ASpiritFrequencyPlayerController>(GetController());
+	if (MyPC && MyPC->bIsMenuOpen)
+	{
+		return;
+	}
+	
 	if (GetController())
 	{
 		// pass the move inputs
@@ -149,6 +146,13 @@ void ASpiritFrequencyCharacter::DoMove(float Right, float Forward)
 
 void ASpiritFrequencyCharacter::ToggleEMF()
 {
+
+	ASpiritFrequencyPlayerController* MyPC = Cast<ASpiritFrequencyPlayerController>(GetController());
+	if (MyPC && MyPC->bIsMenuOpen)
+	{
+		return;
+	}
+	
 	if (EMFComponent)
 	{
 		EMFComponent->ToggleEMF();
@@ -157,6 +161,13 @@ void ASpiritFrequencyCharacter::ToggleEMF()
 
 void ASpiritFrequencyCharacter::CatchGhost()
 {
+
+	ASpiritFrequencyPlayerController* MyPC = Cast<ASpiritFrequencyPlayerController>(GetController());
+	if (MyPC && MyPC->bIsMenuOpen)
+	{
+		return;
+	}
+	
 	UE_LOG(LogTemp, Warning, TEXT("CatchGhost() triggered"));
 	TryCatchGhost();
 }

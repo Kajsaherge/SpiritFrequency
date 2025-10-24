@@ -24,6 +24,11 @@ public:
 	/** Constructor */
 	ASpiritFrequencyPlayerController();
 
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category="UI")
+	bool bIsMenuOpen = false;
+
+
+
 protected:
 
 	/** Input Mapping Contexts */

@@ -41,14 +41,6 @@ protected:
 	UPROPERTY(EditAnywhere, Category ="Input")
 	UInputAction* MoveAction;
 
-	/** Look Input Action */
-	UPROPERTY(EditAnywhere, Category ="Input")
-	class UInputAction* LookAction;
-
-	/** Mouse Look Input Action */
-	UPROPERTY(EditAnywhere, Category ="Input")
-	class UInputAction* MouseLookAction;
-
 	UPROPERTY(EditAnywhere, Category ="Input")
 	UInputAction* EMFToggleAction;
 
@@ -63,13 +55,6 @@ protected:
 	/** Called from Input Actions for movement input */
 	void MoveInput(const FInputActionValue& Value);
 
-	/** Called from Input Actions for looking input */
-	void LookInput(const FInputActionValue& Value);
-
-	/** Handles aim inputs from either controls or UI interfaces */
-	UFUNCTION(BlueprintCallable, Category="Input")
-	virtual void DoAim(float Yaw, float Pitch);
-
 	/** Handles move inputs from either controls or UI interfaces */
 	UFUNCTION(BlueprintCallable, Category="Input")
 	virtual void DoMove(float Right, float Forward);
@@ -79,6 +64,8 @@ protected:
 
 	UFUNCTION(BlueprintCallable, Category="Input")
 	virtual void CatchGhost();
+
+
 
 
 	//** KOMPONENTER

@@ -18,12 +18,6 @@ public:
 	// Sets default values for this actor's properties
 	AGhostManager();
 
-	UPROPERTY()
-	UAudioComponent* GhostAudioComponent;
-
-	UPROPERTY(EditAnywhere, Category="Audio")
-	USoundBase* WonSound;
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -59,6 +53,8 @@ public:
 
 	void OnGhostAttacked(AGhost* AttackedGhost);
 
+;
+
 private: 
 	
 	UPROPERTY(EditAnywhere)
@@ -68,6 +64,8 @@ private:
 	int32 PoolSize = 20;
 
 	AActor* LastUsedSpawnPoint = nullptr;
+
+
 	
 
 

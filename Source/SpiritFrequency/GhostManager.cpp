@@ -8,6 +8,7 @@
 AGhostManager::AGhostManager()
 {
     PrimaryActorTick.bCanEverTick = true;
+
 }
 
 // Called when the game starts or when spawned
@@ -50,7 +51,7 @@ void AGhostManager::SpawnGhost()
     TArray<AActor*> FilteredSpawnPoints = AvailableSpawnPoints;
     if (LastUsedSpawnPoint)
     {
-        FilteredSpawnPoints.Remove(LastUsedSpawnPoint);
+        AvailableSpawnPoints = SpawnPoints;
     }
 
     // Om det finns minst en kvar, välj slumpmässigt
@@ -102,10 +103,11 @@ void AGhostManager::OnGhostCaught()
     }
     else
     {
-        if (WonSound)
+        if (TargetPlayer)
         {
-            UGameplayStatics::PlaySound2D(GetWorld(), WonSound);
+            TargetPlayer->PlayWonSound();
         }
+
         UE_LOG(LogTemp, Warning, TEXT("All ghosts caught, player wins"));
     }
 }
@@ -114,19 +116,32 @@ void AGhostManager::OnGhostAttacked(AGhost* AttackedGhost)
 {
     if (!AttackedGhost) return;
 
-    if (CurrentGhost == AttackedGhost)
-        CurrentGhost = nullptr;
-
-    // Destroy ghost
+    // Destroy ghost först
     AttackedGhost->Destroy();
 
-    // Spawn nytt ghost efter liten delay
-    FTimerHandle TimerHandle;
-    GetWorld()->GetTimerManager().SetTimer(TimerHandle, [this]()
+    // Säkerställ att CurrentGhost bara nollställs om det är samma ghost
+    if (CurrentGhost == AttackedGhost)
     {
-        SpawnGhost();
-    }, 0.1f, false);
+        CurrentGhost = nullptr;
+    }
+
+    // Spawn nytt ghost efter liten delay på ett säkert sätt
+    FTimerHandle TimerHandle;
+    FTimerDelegate TimerDel;
+
+    // Använd TWeakObjectPtr så att timern inte kraschar om GhostManager förstörs
+    TWeakObjectPtr<AGhostManager> WeakThis(this);
+    TimerDel.BindLambda([WeakThis]()
+    {
+        if (WeakThis.IsValid())
+        {
+            WeakThis->SpawnGhost();
+        }
+    });
+
+    GetWorld()->GetTimerManager().SetTimer(TimerHandle, TimerDel, 0.1f, false);
 }
+
 
 // Called every frame
 void AGhostManager::Tick(float DeltaTime)

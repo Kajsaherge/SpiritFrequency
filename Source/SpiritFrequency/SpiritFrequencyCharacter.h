@@ -89,6 +89,10 @@ protected:
 	
 
 public:
+	void PlayWonSound();
+	
+	UPROPERTY(EditAnywhere, Category="Audio")
+	USoundBase* WonSound;
 
 	/** Returns the first person mesh **/
 	USkeletalMeshComponent* GetFirstPersonMesh() const { return FirstPersonMesh; }
@@ -98,6 +102,11 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category="Health")
 	void CheckHealth();
+
+	bool bHasPlayedFirstAttack = false;
+
+	UPROPERTY(EditAnywhere, Category="Audio")
+	USoundBase* FirstAttackSound;
 
 };
 

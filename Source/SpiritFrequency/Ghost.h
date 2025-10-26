@@ -79,10 +79,9 @@ public:
 	UPROPERTY(BlueprintReadWrite)
 	EGhostState CurrentState;
 
-	UPROPERTY(EditAnywhere, Category="Audio")
-	USoundBase* FirstAttackSound;
+	
 
-	bool bHasPlayedFirstAttack = false;
+	
 
 private:
 	float PulseTimer = 0.f;          

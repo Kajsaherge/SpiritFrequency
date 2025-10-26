@@ -15,6 +15,7 @@ void EmptyLinkFunctionForGeneratedCodeSpiritFrequencyCharacter() {}
 ENGINE_API UClass* Z_Construct_UClass_ACharacter();
 ENGINE_API UClass* Z_Construct_UClass_UCameraComponent_NoRegister();
 ENGINE_API UClass* Z_Construct_UClass_USkeletalMeshComponent_NoRegister();
+ENGINE_API UClass* Z_Construct_UClass_USoundBase_NoRegister();
 ENHANCEDINPUT_API UClass* Z_Construct_UClass_UInputAction_NoRegister();
 SPIRITFREQUENCY_API UClass* Z_Construct_UClass_ASpiritFrequencyCharacter();
 SPIRITFREQUENCY_API UClass* Z_Construct_UClass_ASpiritFrequencyCharacter_NoRegister();
@@ -290,6 +291,14 @@ struct Z_Construct_UClass_ASpiritFrequencyCharacter_Statics
 		{ "Category", "Ghost Catching" },
 		{ "ModuleRelativePath", "SpiritFrequencyCharacter.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_WonSound_MetaData[] = {
+		{ "Category", "Audio" },
+		{ "ModuleRelativePath", "SpiritFrequencyCharacter.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_FirstAttackSound_MetaData[] = {
+		{ "Category", "Audio" },
+		{ "ModuleRelativePath", "SpiritFrequencyCharacter.h" },
+	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_FirstPersonMesh;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_FirstPersonCameraComponent;
@@ -299,6 +308,8 @@ struct Z_Construct_UClass_ASpiritFrequencyCharacter_Statics
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_NavigationComponent;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_EMFComponent;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_CatchRadius;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_WonSound;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_FirstAttackSound;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
@@ -321,6 +332,8 @@ const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ASpiritFrequen
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ASpiritFrequencyCharacter_Statics::NewProp_NavigationComponent = { "NavigationComponent", nullptr, (EPropertyFlags)0x00200800000a001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASpiritFrequencyCharacter, NavigationComponent), Z_Construct_UClass_UNavigationComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_NavigationComponent_MetaData), NewProp_NavigationComponent_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ASpiritFrequencyCharacter_Statics::NewProp_EMFComponent = { "EMFComponent", nullptr, (EPropertyFlags)0x00200800000a001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASpiritFrequencyCharacter, EMFComponent), Z_Construct_UClass_UEMFComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_EMFComponent_MetaData), NewProp_EMFComponent_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ASpiritFrequencyCharacter_Statics::NewProp_CatchRadius = { "CatchRadius", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASpiritFrequencyCharacter, CatchRadius), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CatchRadius_MetaData), NewProp_CatchRadius_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ASpiritFrequencyCharacter_Statics::NewProp_WonSound = { "WonSound", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASpiritFrequencyCharacter, WonSound), Z_Construct_UClass_USoundBase_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_WonSound_MetaData), NewProp_WonSound_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ASpiritFrequencyCharacter_Statics::NewProp_FirstAttackSound = { "FirstAttackSound", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASpiritFrequencyCharacter, FirstAttackSound), Z_Construct_UClass_USoundBase_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_FirstAttackSound_MetaData), NewProp_FirstAttackSound_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ASpiritFrequencyCharacter_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASpiritFrequencyCharacter_Statics::NewProp_FirstPersonMesh,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASpiritFrequencyCharacter_Statics::NewProp_FirstPersonCameraComponent,
@@ -330,6 +343,8 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ASpiritFr
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASpiritFrequencyCharacter_Statics::NewProp_NavigationComponent,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASpiritFrequencyCharacter_Statics::NewProp_EMFComponent,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASpiritFrequencyCharacter_Statics::NewProp_CatchRadius,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASpiritFrequencyCharacter_Statics::NewProp_WonSound,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASpiritFrequencyCharacter_Statics::NewProp_FirstAttackSound,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_ASpiritFrequencyCharacter_Statics::PropPointers) < 2048);
 UObject* (*const Z_Construct_UClass_ASpiritFrequencyCharacter_Statics::DependentSingletons[])() = {
@@ -368,10 +383,10 @@ ASpiritFrequencyCharacter::~ASpiritFrequencyCharacter() {}
 struct Z_CompiledInDeferFile_FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h__Script_SpiritFrequency_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_ASpiritFrequencyCharacter, ASpiritFrequencyCharacter::StaticClass, TEXT("ASpiritFrequencyCharacter"), &Z_Registration_Info_UClass_ASpiritFrequencyCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ASpiritFrequencyCharacter), 3586150835U) },
+		{ Z_Construct_UClass_ASpiritFrequencyCharacter, ASpiritFrequencyCharacter::StaticClass, TEXT("ASpiritFrequencyCharacter"), &Z_Registration_Info_UClass_ASpiritFrequencyCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ASpiritFrequencyCharacter), 3693322361U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h__Script_SpiritFrequency_2138072293(TEXT("/Script/SpiritFrequency"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h__Script_SpiritFrequency_3838451224(TEXT("/Script/SpiritFrequency"),
 	Z_CompiledInDeferFile_FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h__Script_SpiritFrequency_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h__Script_SpiritFrequency_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

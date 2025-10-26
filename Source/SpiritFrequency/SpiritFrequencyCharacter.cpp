@@ -175,6 +175,17 @@ void ASpiritFrequencyCharacter::CatchGhost()
 
 void ASpiritFrequencyCharacter::CheckHealth()
 {
+
+	FTimerHandle TimerHandle;
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle, [this]()
+	{
+		if (!bHasPlayedFirstAttack && FirstAttackSound)
+		{
+			UGameplayStatics::PlaySound2D(GetWorld(), FirstAttackSound);
+			bHasPlayedFirstAttack = true;
+		}
+	}, 0.5f, false);
+	
 	if (Health <= 0)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Player has died!"));
@@ -188,4 +199,22 @@ void ASpiritFrequencyCharacter::CheckHealth()
 		}
 	}
 }
+
+void ASpiritFrequencyCharacter::PlayWonSound()
+{
+	if (!WonSound) return;
+
+	// Skapa en timer
+	FTimerHandle TimerHandle;
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle, [this]()
+	{
+		if (WonSound)
+		{
+			UGameplayStatics::PlaySound2D(this, WonSound);
+			UE_LOG(LogTemp, Warning, TEXT("Played WonSound after delay"));
+		}
+	}, 2.0f, false); // 2 sekunders delay, inte loopande
+}
+
+
 

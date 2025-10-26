@@ -53,6 +53,36 @@ DEFINE_FUNCTION(ASpiritFrequencyCharacter::execCatchGhost)
 }
 // ********** End Class ASpiritFrequencyCharacter Function CatchGhost ******************************
 
+// ********** Begin Class ASpiritFrequencyCharacter Function CheckHealth ***************************
+struct Z_Construct_UFunction_ASpiritFrequencyCharacter_CheckHealth_Statics
+{
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "Category", "Health" },
+		{ "ModuleRelativePath", "SpiritFrequencyCharacter.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_ASpiritFrequencyCharacter_CheckHealth_Statics::FuncParams = { { (UObject*(*)())Z_Construct_UClass_ASpiritFrequencyCharacter, nullptr, "CheckHealth", nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_ASpiritFrequencyCharacter_CheckHealth_Statics::Function_MetaDataParams), Z_Construct_UFunction_ASpiritFrequencyCharacter_CheckHealth_Statics::Function_MetaDataParams)},  };
+UFunction* Z_Construct_UFunction_ASpiritFrequencyCharacter_CheckHealth()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_ASpiritFrequencyCharacter_CheckHealth_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(ASpiritFrequencyCharacter::execCheckHealth)
+{
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	P_THIS->CheckHealth();
+	P_NATIVE_END;
+}
+// ********** End Class ASpiritFrequencyCharacter Function CheckHealth *****************************
+
 // ********** Begin Class ASpiritFrequencyCharacter Function DoMove ********************************
 struct Z_Construct_UFunction_ASpiritFrequencyCharacter_DoMove_Statics
 {
@@ -143,6 +173,7 @@ void ASpiritFrequencyCharacter::StaticRegisterNativesASpiritFrequencyCharacter()
 	UClass* Class = ASpiritFrequencyCharacter::StaticClass();
 	static const FNameNativePtrPair Funcs[] = {
 		{ "CatchGhost", &ASpiritFrequencyCharacter::execCatchGhost },
+		{ "CheckHealth", &ASpiritFrequencyCharacter::execCheckHealth },
 		{ "DoMove", &ASpiritFrequencyCharacter::execDoMove },
 		{ "ToggleEMF", &ASpiritFrequencyCharacter::execToggleEMF },
 	};
@@ -272,6 +303,7 @@ struct Z_Construct_UClass_ASpiritFrequencyCharacter_Statics
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
 		{ &Z_Construct_UFunction_ASpiritFrequencyCharacter_CatchGhost, "CatchGhost" }, // 3305317169
+		{ &Z_Construct_UFunction_ASpiritFrequencyCharacter_CheckHealth, "CheckHealth" }, // 4097244786
 		{ &Z_Construct_UFunction_ASpiritFrequencyCharacter_DoMove, "DoMove" }, // 1849427295
 		{ &Z_Construct_UFunction_ASpiritFrequencyCharacter_ToggleEMF, "ToggleEMF" }, // 3180715485
 	};
@@ -336,10 +368,10 @@ ASpiritFrequencyCharacter::~ASpiritFrequencyCharacter() {}
 struct Z_CompiledInDeferFile_FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h__Script_SpiritFrequency_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_ASpiritFrequencyCharacter, ASpiritFrequencyCharacter::StaticClass, TEXT("ASpiritFrequencyCharacter"), &Z_Registration_Info_UClass_ASpiritFrequencyCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ASpiritFrequencyCharacter), 4016194297U) },
+		{ Z_Construct_UClass_ASpiritFrequencyCharacter, ASpiritFrequencyCharacter::StaticClass, TEXT("ASpiritFrequencyCharacter"), &Z_Registration_Info_UClass_ASpiritFrequencyCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ASpiritFrequencyCharacter), 3586150835U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h__Script_SpiritFrequency_1391606963(TEXT("/Script/SpiritFrequency"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h__Script_SpiritFrequency_2138072293(TEXT("/Script/SpiritFrequency"),
 	Z_CompiledInDeferFile_FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h__Script_SpiritFrequency_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h__Script_SpiritFrequency_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

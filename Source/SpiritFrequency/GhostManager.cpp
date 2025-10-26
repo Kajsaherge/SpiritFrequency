@@ -1,83 +1,111 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "GhostManager.h"
 #include "Ghost.h"
 #include "SpawnPoints.h"
+#include "EngineUtils.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AGhostManager::AGhostManager()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
-
+    PrimaryActorTick.bCanEverTick = true;
 }
 
 // Called when the game starts or when spawned
 void AGhostManager::BeginPlay()
 {
-	Super::BeginPlay();
+    Super::BeginPlay();
 
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASpawnPoints::StaticClass(), SpawnPoints);
+    // Hämta spelaren
+    for (TActorIterator<ASpiritFrequencyCharacter> It(GetWorld()); It; ++It)
+    {
+        TargetPlayer = *It;
+        break;
+    }
 
-	//kopiera till spawnpoit
-	AvailableSpawnPoints = SpawnPoints;
+    // Hämta alla spawnpoints
+    UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASpawnPoints::StaticClass(), SpawnPoints);
+    AvailableSpawnPoints = SpawnPoints;
 
-	SpawnGhost();
-	
+    // Spawn första ghost
+    SpawnGhost();
 }
 
 void AGhostManager::SpawnGhost()
 {
+    if (!GhostClass) return;
 
-	if (!GhostClass) return;
+    // Återställ spawnpoints om alla har används
+    if (AvailableSpawnPoints.Num() == 0)
+    {
+        AvailableSpawnPoints = SpawnPoints;
+    }
 
-	if (AvailableSpawnPoints.Num() == 0)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("No more available spawnpoints!"));
-		return;
-	}
+    if (AvailableSpawnPoints.Num() == 0)
+    {
+        UE_LOG(LogTemp, Warning, TEXT("SpawnGhost: inga spawnpoints definierade!"));
+        return;
+    }
 
-	// Välj slumpmässigt index
-	int32 RandomIndex = FMath::RandRange(0, AvailableSpawnPoints.Num() - 1);
-	AActor* ChosenPoint = AvailableSpawnPoints[RandomIndex];
+    // Välj slumpmässig spawnpoint
+    int32 RandomIndex = FMath::RandRange(0, AvailableSpawnPoints.Num() - 1);
+    AActor* ChosenPoint = AvailableSpawnPoints[RandomIndex];
+    AvailableSpawnPoints.RemoveAt(RandomIndex);
 
-	// Ta bort den från listan så den inte används igen
-	AvailableSpawnPoints.RemoveAt(RandomIndex);
+    // Spawn ghost
+    FActorSpawnParameters SpawnParams;
+    CurrentGhost = GetWorld()->SpawnActor<AGhost>(GhostClass, ChosenPoint->GetActorLocation(), ChosenPoint->GetActorRotation(), SpawnParams);
 
-	FVector SpawnLocation = ChosenPoint->GetActorLocation();
-	FRotator SpawnRotation = ChosenPoint->GetActorRotation();
+    if (!CurrentGhost)
+    {
+        UE_LOG(LogTemp, Warning, TEXT("SpawnGhost: failed to spawn ghost!"));
+        return;
+    }
 
-	FActorSpawnParameters SpawnParams;
-	CurrentGhost = GetWorld()->SpawnActor<AGhost>(GhostClass, SpawnLocation, SpawnRotation, SpawnParams);
+    // Koppla ghosten till manager
+    CurrentGhost->GhostManager = this;
 
-	UE_LOG(LogTemp, Warning, TEXT("Spawned Ghost at %s"), *ChosenPoint->GetName());
+    UE_LOG(LogTemp, Warning, TEXT("Spawned Ghost at %s"), *ChosenPoint->GetName());
+}
+
+void AGhostManager::OnGhostCaught()
+{
+    if (!CurrentGhost) return;
+
+    // Destroy ghost
+    CurrentGhost->Destroy();
+    CurrentGhost = nullptr;
+    GhostsCaught++;
+
+    if (GhostsCaught < GhostsToCatch)
+    {
+        SpawnGhost();
+    }
+    else
+    {
+        UE_LOG(LogTemp, Warning, TEXT("All ghosts caught, player wins"));
+    }
+}
+
+void AGhostManager::OnGhostAttacked(AGhost* AttackedGhost)
+{
+    if (!AttackedGhost) return;
+
+    if (CurrentGhost == AttackedGhost)
+        CurrentGhost = nullptr;
+
+    // Destroy ghost
+    AttackedGhost->Destroy();
+
+    // Spawn nytt ghost efter liten delay
+    FTimerHandle TimerHandle;
+    GetWorld()->GetTimerManager().SetTimer(TimerHandle, [this]()
+    {
+        SpawnGhost();
+    }, 0.1f, false);
 }
 
 // Called every frame
 void AGhostManager::Tick(float DeltaTime)
 {
-	Super::Tick(DeltaTime);
-
+    Super::Tick(DeltaTime);
 }
-
-void AGhostManager::OnGhostCaught()
-{
-	if (CurrentGhost)
-	{
-		CurrentGhost->Destroy();
-		CurrentGhost = nullptr;
-		GhostsCaught++;
-
-		if (GhostsCaught < GhostsToCatch)
-		{
-			SpawnGhost();
-		}
-		else
-		{
-			UE_LOG(LogTemp, Warning, TEXT("All ghosts caught, player wins"));
-		}
-	}
-}
-

@@ -74,7 +74,7 @@ void UNavigationComponent::SenseSurroundings()
 			if (Distance <= SoundDistanceThreshold)
 			{
 				float AttenuationFactor = FMath::Clamp(Distance / SoundDistanceThreshold, 0.f, 1.f);
-				UE_LOG(LogTemp, Log, TEXT("%s: Avstånd = %.1f, ljud dämpningsfaktor = %.2f"), *DirectionName, Distance, AttenuationFactor);
+				//UE_LOG(LogTemp, Log, TEXT("%s: Avstånd = %.1f, ljud dämpningsfaktor = %.2f"), *DirectionName, Distance, AttenuationFactor);
 				// TODO: Använd AttenuationFactor på AudioComponent om du vill
 			}
 

@@ -9,6 +9,7 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "EnhancedInputComponent.h"
 #include "Ghost.h"
+#include "Kismet/GameplayStatics.h"
 #include "InputActionValue.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "SpiritFrequency.h"
@@ -171,3 +172,20 @@ void ASpiritFrequencyCharacter::CatchGhost()
 	UE_LOG(LogTemp, Warning, TEXT("CatchGhost() triggered"));
 	TryCatchGhost();
 }
+
+void ASpiritFrequencyCharacter::CheckHealth()
+{
+	if (Health <= 0)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Player has died!"));
+
+		// Restart level
+		UWorld* World = GetWorld();
+		if (World)
+		{
+			FName CurrentLevel = *World->GetMapName();
+			UGameplayStatics::OpenLevel(World, CurrentLevel);
+		}
+	}
+}
+

@@ -50,6 +50,8 @@ protected:
 public:
 	ASpiritFrequencyCharacter();
 
+	int Health = 3; 
+
 protected:
 
 	/** Called from Input Actions for movement input */
@@ -65,8 +67,8 @@ protected:
 	UFUNCTION(BlueprintCallable, Category="Input")
 	virtual void CatchGhost();
 
-
-
+	
+	
 
 	//** KOMPONENTER
 
@@ -93,6 +95,9 @@ public:
 
 	/** Returns first person camera component **/
 	UCameraComponent* GetFirstPersonCameraComponent() const { return FirstPersonCameraComponent; }
+
+	UFUNCTION(BlueprintCallable, Category="Health")
+	void CheckHealth();
 
 };
 

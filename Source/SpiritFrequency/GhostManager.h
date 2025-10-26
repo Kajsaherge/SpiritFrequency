@@ -38,6 +38,9 @@ protected:
 	int32 GhostsCaught = 0;
 
 	void SpawnGhost();
+
+	UPROPERTY()
+	ASpiritFrequencyCharacter* TargetPlayer;
 	
 	TArray<AActor*> SpawnPoints;
 	
@@ -48,5 +51,16 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	void OnGhostCaught();
+
+	void OnGhostAttacked(AGhost* AttackedGhost);
+	
+	UPROPERTY(EditAnywhere)
+	TArray<AGhost*> GhostPool;
+
+	UPROPERTY(EditAnywhere)
+	int32 PoolSize = 20;
+	
+
+
 
 };

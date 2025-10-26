@@ -106,6 +106,9 @@ void UEMFComponent::UpdateEMF()
     {
         if (!Ghost) continue;
 
+        // --- NYTT: filtrera bort ghostar som är hidden / despawned ---
+        if (Ghost->IsHidden()) continue;
+
         float Distance = FVector::Dist(PlayerLocation, Ghost->GetActorLocation());
         if (Distance < ClosestDistance)
         {
@@ -134,10 +137,9 @@ void UEMFComponent::UpdateEMF()
     {
         FVector DirectionToGhost = (ClosestGhost->GetActorLocation() - PlayerLocation).GetSafeNormal();
 
-        // Ping-placering relativt spelaren (t.ex. lite framför och ovanför)
+        // Ping-placering relativt spelaren
         FVector RelativePingLocation = DirectionToGhost * 10 + FVector(0, 0, 50.f);
 
-        // Spela ljudet kopplat till spelaren, så det följer
         UGameplayStatics::SpawnSoundAttached(
             PingSound,
             GetOwner()->GetRootComponent(),   // Fäster ljudet till spelaren
@@ -148,9 +150,7 @@ void UEMFComponent::UpdateEMF()
         );
 
         TimeSinceLastPing = 0.f;
-
-        UE_LOG(LogTemp, Log, TEXT("Ping! Closest distance: %.1f, Interval: %.2f"), ClosestDistance, Interval);
     }
-
 }
+
 

@@ -137,6 +137,18 @@ void AGhost::AttackPlayer()
 		UGameplayStatics::PlaySoundAtLocation(this, AttackSound, GetActorLocation());
 	}
 
+	FTimerHandle TimerHandle;
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle, [this]()
+	{
+		if (!bHasPlayedFirstAttack && FirstAttackSound)
+		{
+			UGameplayStatics::PlaySound2D(GetWorld(), FirstAttackSound);
+			bHasPlayedFirstAttack = true;
+		}
+	}, 0.5f, false);
+	
+
+
 	// Informera manageren och markera för destruktion
 	if (GhostManager)
 	{
@@ -155,6 +167,11 @@ void AGhost::AttackPlayer()
 
 void AGhost::Caught() const
 {
+	if (CaptureSound)
+	{
+		UGameplayStatics::PlaySoundAtLocation(this, CaptureSound, GetActorLocation());
+	}
+	
 	for (TActorIterator<AGhostManager> It(GetWorld()); It; ++It)
 	{
 		It->OnGhostCaught();

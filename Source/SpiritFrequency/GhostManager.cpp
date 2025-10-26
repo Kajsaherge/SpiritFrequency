@@ -46,10 +46,28 @@ void AGhostManager::SpawnGhost()
         return;
     }
 
-    // Välj slumpmässig spawnpoint
-    int32 RandomIndex = FMath::RandRange(0, AvailableSpawnPoints.Num() - 1);
-    AActor* ChosenPoint = AvailableSpawnPoints[RandomIndex];
-    AvailableSpawnPoints.RemoveAt(RandomIndex);
+    // Skapa en lista utan den senaste spawnpointen
+    TArray<AActor*> FilteredSpawnPoints = AvailableSpawnPoints;
+    if (LastUsedSpawnPoint)
+    {
+        FilteredSpawnPoints.Remove(LastUsedSpawnPoint);
+    }
+
+    // Om det finns minst en kvar, välj slumpmässigt
+    AActor* ChosenPoint = nullptr;
+    if (FilteredSpawnPoints.Num() > 0)
+    {
+        int32 RandomIndex = FMath::RandRange(0, FilteredSpawnPoints.Num() - 1);
+        ChosenPoint = FilteredSpawnPoints[RandomIndex];
+    }
+    else
+    {
+        // Om bara den senaste finns kvar, välj den ändå
+        ChosenPoint = AvailableSpawnPoints[0];
+    }
+
+    // Ta bort från AvailableSpawnPoints så den inte används direkt igen
+    AvailableSpawnPoints.Remove(ChosenPoint);
 
     // Spawn ghost
     FActorSpawnParameters SpawnParams;
@@ -61,8 +79,10 @@ void AGhostManager::SpawnGhost()
         return;
     }
 
-    // Koppla ghosten till manager
     CurrentGhost->GhostManager = this;
+
+    // Spara den som just användes
+    LastUsedSpawnPoint = ChosenPoint;
 
     UE_LOG(LogTemp, Warning, TEXT("Spawned Ghost at %s"), *ChosenPoint->GetName());
 }
@@ -82,6 +102,10 @@ void AGhostManager::OnGhostCaught()
     }
     else
     {
+        if (WonSound)
+        {
+            UGameplayStatics::PlaySound2D(GetWorld(), WonSound);
+        }
         UE_LOG(LogTemp, Warning, TEXT("All ghosts caught, player wins"));
     }
 }

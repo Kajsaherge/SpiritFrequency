@@ -380,14 +380,14 @@ ASpiritFrequencyCharacter::~ASpiritFrequencyCharacter() {}
 // ********** End Class ASpiritFrequencyCharacter **************************************************
 
 // ********** Begin Registration *******************************************************************
-struct Z_CompiledInDeferFile_FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h__Script_SpiritFrequency_Statics
+struct Z_CompiledInDeferFile_FID_Users_novi4600_Documents_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h__Script_SpiritFrequency_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
 		{ Z_Construct_UClass_ASpiritFrequencyCharacter, ASpiritFrequencyCharacter::StaticClass, TEXT("ASpiritFrequencyCharacter"), &Z_Registration_Info_UClass_ASpiritFrequencyCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ASpiritFrequencyCharacter), 3693322361U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h__Script_SpiritFrequency_3838451224(TEXT("/Script/SpiritFrequency"),
-	Z_CompiledInDeferFile_FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h__Script_SpiritFrequency_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h__Script_SpiritFrequency_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_novi4600_Documents_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h__Script_SpiritFrequency_3838451224(TEXT("/Script/SpiritFrequency"),
+	Z_CompiledInDeferFile_FID_Users_novi4600_Documents_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h__Script_SpiritFrequency_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_novi4600_Documents_GitHub_SpiritFrequency_Source_SpiritFrequency_SpiritFrequencyCharacter_h__Script_SpiritFrequency_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
 // ********** End Registration *********************************************************************

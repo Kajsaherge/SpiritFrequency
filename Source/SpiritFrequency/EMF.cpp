@@ -123,8 +123,8 @@ void UEMFComponent::UpdateEMF()
     if (!ClosestGhost) return;
 
     // --- Ping-logik ---
-    float MaxEffectDistance = 5000.f;
-    float MinEffectDistance = 1000.f;
+    float MaxEffectDistance = 7000.f;
+    float MinEffectDistance = 1500.f;
     float ClampedDistance = FMath::Clamp(ClosestDistance, MinEffectDistance, MaxEffectDistance);
     float NormalizedDistance = 1.f - ((ClampedDistance - MinEffectDistance) / (MaxEffectDistance - MinEffectDistance));
     float AdjustedDistance = FMath::Pow(NormalizedDistance, 2.5f);
